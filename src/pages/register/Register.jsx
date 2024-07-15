@@ -16,7 +16,8 @@ const Register = () => {
   const [formData, setFormData] = useState(initialState);
   let navigate = useNavigate();
 
-  const [registerAdmin, { data, isLoading }] = useRegisterAdminMutation();
+  const [registerAdmin, { data, isLoading, isSuccess }] =
+    useRegisterAdminMutation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,8 +31,10 @@ const Register = () => {
     e.preventDefault();
     try {
       registerAdmin(formData);
-      navigate("/admin/customers");
-      localStorage.setItem("x-auth-token", data.token);
+      if (isSuccess) {
+        navigate("/admin/customers");
+        localStorage.setItem("x-auth-token", data.innerData.token);
+      }
     } catch (err) {
       console.error("Failed to register:", err);
     }

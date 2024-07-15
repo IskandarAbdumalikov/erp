@@ -7,17 +7,15 @@ const Login = () => {
   const [username, setUsername] = useState("muxtorjon");
   const [password, setPassword] = useState("12345677");
   const [signIn, { data, isLoading, isSuccess }] = useSignInMutation();
-  console.log(data);
   let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      signIn({ username, password });
+    console.log(isSuccess);
+    signIn({ username, password });
+    if (isSuccess) {
       navigate("/admin/customers");
-      localStorage.setItem("x-auth-token", data.token);
-    } catch (err) {
-      console.error("Failed to login:", err);
+      localStorage.setItem("x-auth-token", data.innerData.token);
     }
   };
 
