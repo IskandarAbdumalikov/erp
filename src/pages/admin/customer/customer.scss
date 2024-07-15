@@ -1,0 +1,70 @@
+.customer {
+  padding: 1rem;
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    thead {
+      tr {
+        th {
+          padding: 0.5rem;
+          background-color: #f4f4f4;
+          border: 1px solid #ddd;
+          text-align: start;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        &:nth-child(even) {
+          background-color: #f9f9f9;
+        }
+
+        td {
+          padding: 0.5rem;
+          border: 1px solid #ddd;
+          text-align: start;
+
+          &:first-child {
+            text-align: start;
+          }
+        }
+      }
+    }
+  }
+
+  .customer__budget {
+    max-height: 25px;
+    max-width: 80px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+  }
+  .incomer {
+    color: #00b69b;
+    background: #ccf0eb;
+  }
+  .nothing {
+    color: #6226ef;
+    background: #e0d4fc;
+  }
+  .outcomer {
+    color: #ef3826;
+    background: #fcd7d4;
+  }
+  @media (max-width: 768px) {
+    table {
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+  }
+}
