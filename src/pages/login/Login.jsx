@@ -6,13 +6,14 @@ import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
   const [username, setUsername] = useState("muxtorjon");
   const [password, setPassword] = useState("12345677");
-  const [signIn, { isLoading, isSuccess }] = useSignInMutation();
+  const [signIn, { data, isLoading, isSuccess }] = useSignInMutation();
+  console.log(data);
   let navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      const { data } = signIn({ username, password });
+      signIn({ username, password });
       navigate("/admin/customers");
       localStorage.setItem("x-auth-token", data.token);
     } catch (err) {
