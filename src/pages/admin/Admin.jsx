@@ -6,6 +6,7 @@ import AdminHeader from "./admin-header/AdminHeader";
 
 const Admin = () => {
   const [close, setClose] = useState(false);
+  
 
   return (
     <div className={`admin ${close ? "close" : ""}`}>

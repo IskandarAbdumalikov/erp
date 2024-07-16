@@ -10,15 +10,18 @@
     border-collapse: collapse;
     margin: 1rem 0;
     border-radius: 10px;
+    background: white;
     thead {
       tr {
-        padding: 0.5rem;
-        background-color: #f4f4f4;
+        padding: 18px 20px;
         border: 1px solid #ddd;
         text-align: start;
         th {
           text-align: start;
-          padding: 0.5rem;
+          padding: 10px 20px;
+        }
+        th:last-child(){
+
         }
       }
     }
@@ -29,7 +32,7 @@
         text-align: start;
 
         td {
-          padding: 0.5rem;
+          padding: 18px 20px;
 
           &:first-child {
             text-align: start;
