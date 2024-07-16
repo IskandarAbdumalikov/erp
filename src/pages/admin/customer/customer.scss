@@ -9,27 +9,27 @@
     width: 100%;
     border-collapse: collapse;
     margin: 1rem 0;
+    border-radius: 10px;
     thead {
       tr {
+        padding: 0.5rem;
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        text-align: start;
         th {
-          padding: 0.5rem;
-          background-color: #f4f4f4;
-          border: 1px solid #ddd;
           text-align: start;
+          padding: 0.5rem;
         }
       }
     }
 
     tbody {
       tr {
-        &:nth-child(even) {
-          background-color: #f9f9f9;
-        }
+        border: 1px solid #ddd;
+        text-align: start;
 
         td {
           padding: 0.5rem;
-          border: 1px solid #ddd;
-          text-align: start;
 
           &:first-child {
             text-align: start;
