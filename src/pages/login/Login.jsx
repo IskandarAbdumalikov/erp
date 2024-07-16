@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSignInMutation } from "../../context/adminSlice";
 import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,14 +9,17 @@ const Login = () => {
   const [signIn, { data, isLoading, isSuccess }] = useSignInMutation();
   let navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(isSuccess);
-    signIn({ username, password });
+  useEffect(() => {
     if (isSuccess) {
       navigate("/admin/customers");
       localStorage.setItem("x-auth-token", data.innerData.token);
     }
+  }, [isSuccess]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(isSuccess);
+    signIn({ username, password });
   };
 
   return (
