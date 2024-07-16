@@ -1,10 +1,7 @@
 import React, { memo } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FaArrowAltCircleLeft, FaUsers } from "react-icons/fa";
-import { IoCreateOutline } from "react-icons/io5";
 
-import { IoIosLogOut } from "react-icons/io";
-import { AiOutlineProduct } from "react-icons/ai";
 
 import "./sidebar.scss";
 import { LuStore } from "react-icons/lu";
@@ -22,7 +19,7 @@ const Sidebar = () => {
         <Link to={"/"}>
           <FaArrowAltCircleLeft />
         </Link>
-        <span>Dashboard</span>
+        <span>Market</span>
       </h2>
       <ul className="sidebar__collection">
         <li className="sidebar__item">

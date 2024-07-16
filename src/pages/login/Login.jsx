@@ -4,7 +4,7 @@ import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState("muxtorjon");
+  const [username, setUsername] = useState("john32");
   const [password, setPassword] = useState("12345677");
   const [signIn, { data, isLoading, isSuccess }] = useSignInMutation();
   let navigate = useNavigate();

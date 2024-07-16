@@ -4,7 +4,7 @@ import { logout } from "../authSlice/authSlice";
 const baseQuery = async (args, api, extraOptions) => {
   const { dispatch } = api;
   const rawBaseQuery = fetchBaseQuery({
-    baseUrl: "http://trade.namtech.uz",
+    baseUrl: "https://trade.namtech.uz",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("x-auth-token");
       if (token) {
