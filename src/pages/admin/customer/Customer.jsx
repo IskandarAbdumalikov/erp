@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./customer.scss";
 import {
   useGetCustomersQuery,
@@ -27,7 +27,7 @@ const Customer = () => {
   const [showPaymentModule, setShowPaymentModule] = useState(false);
   const [formData, setFormData] = useState(initialState);
 
-  const [createPayment] = useCreatePaymentMutation();
+  const [createPayment, { isSuccess }] = useCreatePaymentMutation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,12 +36,16 @@ const Customer = () => {
       [name]: value,
     });
   };
+  useEffect(() => {
+    if (isSuccess) {
+      setShowPaymentModule(false);
+    }
+  }, [isSuccess]);
 
   const handleCreatePaymentSubmit = (e) => {
     e.preventDefault();
     if (formData.customerId) {
       createPayment(formData);
-      setShowPaymentModule(false); // Close the module after submission
     } else {
       console.error("customerId is required");
     }
