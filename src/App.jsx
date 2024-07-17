@@ -7,7 +7,9 @@ import Admin from "./pages/admin/Admin";
 import AdminStore from "./pages/admin/store/AdminStore";
 import Saller from "./pages/admin/saller/Saller";
 import Customer from "./pages/admin/customer/Customer";
-import SingleCustomer from "./pages/singleCustomer/SingleCustomer";
+import SinglePage from "./pages/singleCustomer/SinglePage";
+import CreateCustomer from "./pages/createCustomer/CreateCustomer";
+import EditCustomer from "./pages/singleCustomer/EditCustomer";
 
 const App = () => {
   return (
@@ -20,9 +22,11 @@ const App = () => {
             <Route path="store" element={<AdminStore />} />
             <Route path="saller" element={<Saller />} />
             <Route path="customers" element={<Customer />} />
+            <Route path="create-customers" element={<CreateCustomer />} />
+            <Route path={`customers/:customerId`} element={<SinglePage />} />
             <Route
-              path={`customers/:customerId`}
-              element={<SingleCustomer />}
+              path={`edit-customer/:customerId`}
+              element={<EditCustomer />}
             />
           </Route>
         </Route>

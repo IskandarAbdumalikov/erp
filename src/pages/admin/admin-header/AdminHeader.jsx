@@ -1,8 +1,11 @@
 import { IoIosMenu } from "react-icons/io";
-import React from "react";
+import React, { useState } from "react";
 import { CiSearch } from "react-icons/ci";
+import SearchModule from "./SearchModule";
+import "./adminHeader.scss";
 
 const AdminHeader = ({ setClose }) => {
+  let [search, setSearch] = useState("");
   return (
     <div className="admin__header">
       <div className="admin__header__left">
@@ -12,11 +15,17 @@ const AdminHeader = ({ setClose }) => {
         >
           <IoIosMenu />
         </button>
-        <form action="">
+        <form className="form__search" action="">
           <button>
             <CiSearch />
           </button>
-          <input placeholder="Search" type="text" />
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search"
+            value={search}
+            type="text"
+          />
+          {search ? <SearchModule search={search} /> : <></>}
         </form>
       </div>
       <div>

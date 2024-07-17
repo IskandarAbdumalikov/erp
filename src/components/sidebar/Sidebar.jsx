@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FaArrowAltCircleLeft, FaUsers } from "react-icons/fa";
-
+import { FaArrowAltCircleLeft, FaHandshake, FaStore, FaUserPlus, FaUsers } from "react-icons/fa";
 
 import "./sidebar.scss";
 import { LuStore } from "react-icons/lu";
@@ -23,6 +22,12 @@ const Sidebar = () => {
       </h2>
       <ul className="sidebar__collection">
         <li className="sidebar__item">
+          <NavLink className={"sidebar__link"} to={"create-customers"}>
+            <FaUserPlus />
+            <span>Mijoz yaratish</span>
+          </NavLink>
+        </li>
+        <li className="sidebar__item">
           <NavLink className={"sidebar__link"} to={"customers"}>
             <FaUsers />
             <span>Mijozlar</span>
@@ -30,13 +35,13 @@ const Sidebar = () => {
         </li>
         <li className="sidebar__item">
           <NavLink className={"sidebar__link"} to={"saller"}>
-            <GiBuyCard />
+            <FaHandshake />
             Sotuvchilar
           </NavLink>
         </li>
         <li className="sidebar__item">
           <NavLink className={"sidebar__link"} to={"store"}>
-            <LuStore />
+            <FaStore />
             <span>Ombor</span>
           </NavLink>
         </li>

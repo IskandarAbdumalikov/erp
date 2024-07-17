@@ -5,18 +5,21 @@ import { productApi } from "./productsApi";
 import { adminApi } from "./adminSlice";
 import { api } from "./api";
 import authSlice from "./authSlice/authSlice";
+import { paymentApi } from "./paymentApi";
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
     [api.reducerPath]: api.reducer,
     [customerApi.reducerPath]: customerApi.reducer,
+    [paymentApi.reducerPath]: paymentApi.reducer,
     [productApi.reducerPath]: productApi.reducer,
     [adminApi.reducerPath]: adminApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(productApi.middleware)
+      .concat(paymentApi.middleware)
       .concat(customerApi.middleware)
       .concat(adminApi.middleware)
       .concat(api.middleware),

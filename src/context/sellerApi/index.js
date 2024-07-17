@@ -9,6 +9,13 @@ export const sellerApi = api.injectEndpoints({
       }),
       providesTags: ["Seller"],
     }),
+    getSellersBySearch: build.query({
+      query: (params) => ({
+        url: "get/sellers/search",
+        params,
+      }),
+      providesTags: ["Seller"],
+    }),
     loginSeller: build.mutation({
       query: (body) => ({
         url: "/auth/sign-in",
@@ -30,6 +37,7 @@ export const sellerApi = api.injectEndpoints({
 
 export const {
   useGetSellersQuery,
+  useGetSellersBySearchQuery,
   useRegisterSellerMutation,
   useLoginSellerMutation,
 } = sellerApi;
