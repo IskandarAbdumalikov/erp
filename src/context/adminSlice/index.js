@@ -9,6 +9,13 @@ export const adminApi = api.injectEndpoints({
       }),
       providesTags: ["Admin"],
     }),
+    getProfile: build.query({
+      query: (params) => ({
+        url: "/get/profile",
+        params,
+      }),
+      providesTags: ["Admin"],
+    }),
     signIn: build.mutation({
       query: (body) => ({
         url: "/admin/sign-in",
@@ -32,4 +39,5 @@ export const {
   useRegisterAdminMutation,
   useSignInMutation,
   useGetAdminsQuery,
+  useGetProfileQuery,
 } = adminApi;

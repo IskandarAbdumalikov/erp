@@ -1,24 +1,40 @@
 import React, { memo } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { FaArrowAltCircleLeft, FaHandshake, FaStore, FaUserPlus, FaUsers } from "react-icons/fa";
+import {
+  FaArrowAltCircleLeft,
+  FaHandshake,
+  FaStore,
+  FaUserPlus,
+  FaUsers,
+} from "react-icons/fa";
 
 import "./sidebar.scss";
 import { LuStore } from "react-icons/lu";
 import { GiBuyCard } from "react-icons/gi";
+import { useDispatch } from "react-redux";
+import { logout } from "../../context/authSlice/authSlice";
+import { IoLogOut } from "react-icons/io5";
+import { useGetProfileQuery } from "../../context/adminSlice";
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  let dispatch = useDispatch();
+
   const handleLogOut = () => {
-    localStorage.clear();
     navigate("/");
+    dispatch(logout());
   };
+  let { data } = useGetProfileQuery();
+  let user = data?.innerData?.user;
+  let avatar = user.fname.split("")[0];
+
   return (
     <div className="sidebar">
       <h2 className="sidebar__logo">
         <Link to={"/"}>
-          <FaArrowAltCircleLeft />
+          <span className="sidebar__avatar">{avatar}</span>
         </Link>
-        <span>Market</span>
+        <span>{user.fname}</span>
       </h2>
       <ul className="sidebar__collection">
         <li className="sidebar__item">
@@ -44,6 +60,12 @@ const Sidebar = () => {
             <FaStore />
             <span>Ombor</span>
           </NavLink>
+        </li>
+        <li className="sidebar__item">
+          <Link onClick={handleLogOut} className={"sidebar__link"}>
+            <IoLogOut />
+            <span>Chiqish</span>
+          </Link>
         </li>
       </ul>
 

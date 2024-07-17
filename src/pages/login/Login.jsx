@@ -3,26 +3,28 @@ import { useSignInMutation } from "../../context/adminSlice";
 import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../context/authSlice/authSlice";
 
 const Login = () => {
   const [username, setUsername] = useState("iskandar2007");
+  let dispatch = useDispatch();
   const [password, setPassword] = useState("iskandar2007");
   const [signIn, { data, isLoading, isSuccess, isError, error }] =
     useSignInMutation();
   let navigate = useNavigate();
-  console.log(isError);
+  console.log(isSuccess);
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success(data?.msg);
       navigate("/admin/customers");
-      localStorage.setItem("x-auth-token", data.innerData.token);
+      dispatch(setToken(data?.innerData?.token));
+      toast.success(data?.msg);
     }
   }, [isSuccess]);
 
   useEffect(() => {
     if (isError) {
-      console.log(error);
       toast.error(error?.data?.msg);
     }
   }, [isError]);

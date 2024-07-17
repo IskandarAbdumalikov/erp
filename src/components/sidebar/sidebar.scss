@@ -7,7 +7,16 @@
   color: black;
   padding: 30px 16px;
   overflow: hidden;
-
+  &__avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #4880ff;
+    color: white;
+  }
   &__collection {
     margin: 50px 0;
   }

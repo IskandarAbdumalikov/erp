@@ -113,6 +113,14 @@ const Customer = () => {
                 {showParams === el._id ? (
                   <div
                     onClick={() => setShowParams("")}
+                    className="overlay-transparent"
+                  ></div>
+                ) : (
+                  <></>
+                )}
+                {showParams === el._id ? (
+                  <div
+                    onClick={() => setShowParams("")}
                     className="params__module"
                   >
                     <Link style={{ color: "blue" }} to={`${el._id}`}>
@@ -150,13 +158,19 @@ const Customer = () => {
           ))}
         </tbody>
       </table>
-      <Stack spacing={2}>
-        <Pagination
-          count={data?.totalCount ? Math.ceil(data.totalCount / limit) : 1}
-          page={skip}
-          onChange={handleChangePagination}
-        />
-      </Stack>
+      <div className="pagination">
+        <Stack spacing={2}>
+          <Pagination
+            count={data?.totalCount ? Math.ceil(data.totalCount / limit) : 1}
+            page={skip}
+            onChange={handleChangePagination}
+          />
+        </Stack>
+        <select onChange={(e) => setLimit(e.target.value)} name="" id="">
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+      </div>
       {showPaymentModule && (
         <>
           <Module>
