@@ -7,19 +7,19 @@ export const customerApi = api.injectEndpoints({
         url: "/get/customers",
         params,
       }),
-      providesTags: ["Customer"],
+      providesTags: ["Customer", "Payment"],
     }),
     getSingleCustomer: build.query({
       query: (id) => ({
         url: `/get/customer/${id}`,
       }),
-      providesTags: ["Customer"],
+      providesTags: ["Customer", "Payment"],
     }),
     getCustomersBySearch: build.query({
       query: (search) => ({
         url: `/get/customers/search/${search}`,
       }),
-      providesTags: ["Customer"],
+      providesTags: ["Customer", "Payment"],
     }),
     signIn: build.mutation({
       query: (body) => ({
@@ -27,7 +27,7 @@ export const customerApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Customer"],
+      invalidatesTags: ["Customer", "Payment"],
     }),
     registerCustomer: build.mutation({
       query: (body) => ({
@@ -35,7 +35,7 @@ export const customerApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Customer"],
+      invalidatesTags: ["Customer", "Payment"],
     }),
     pinCustomer: build.mutation({
       query: ({ customer }) => ({
@@ -43,7 +43,7 @@ export const customerApi = api.injectEndpoints({
         method: "PATCH",
         body: { ...customer, pin: !customer.pin },
       }),
-      invalidatesTags: ["Customer"],
+      invalidatesTags: ["Customer", "Payment"],
     }),
     updateCustomer: build.mutation({
       query: ({ id, ...body }) => ({
@@ -51,7 +51,7 @@ export const customerApi = api.injectEndpoints({
         method: "PATCH",
         body,
       }),
-      invalidatesTags: ["Customer"],
+      invalidatesTags: ["Customer", "Payment"],
     }),
   }),
 });
