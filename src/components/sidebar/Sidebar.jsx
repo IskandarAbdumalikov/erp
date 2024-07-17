@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../../context/authSlice/authSlice";
 import { IoLogOut } from "react-icons/io5";
 import { useGetProfileQuery } from "../../context/adminSlice";
+import { Avatar } from "@mui/material";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -26,15 +27,15 @@ const Sidebar = () => {
   };
   let { data } = useGetProfileQuery();
   let user = data?.innerData?.user;
-  let avatar = user.fname.split("")[0];
+  let avatar = user?.fname?.split("")[0];
 
   return (
     <div className="sidebar">
       <h2 className="sidebar__logo">
         <Link to={"/"}>
-          <span className="sidebar__avatar">{avatar}</span>
+          <Avatar sx={{ bgcolor: "#4880ff" }}>{avatar}</Avatar>
         </Link>
-        <span>{user.fname}</span>
+        <span>{user?.fname}</span>
       </h2>
       <ul className="sidebar__collection">
         <li className="sidebar__item">

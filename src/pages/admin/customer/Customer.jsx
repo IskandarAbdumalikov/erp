@@ -16,6 +16,7 @@ import Module from "../../../components/module/Module";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import Stack from "@mui/material/Stack";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const initialState = {
   customerId: "",
@@ -166,10 +167,19 @@ const Customer = () => {
             onChange={handleChangePagination}
           />
         </Stack>
-        <select onChange={(e) => setLimit(e.target.value)} name="" id="">
-          <option value="10">10</option>
-          <option value="20">20</option>
-        </select>
+        <FormControl style={{ maxWidth: 200 }} fullWidth>
+          <InputLabel id="demo-simple-select-label">Age</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={limit}
+            label="Age"
+            onChange={(e) => setLimit(e.target.value)}
+          >
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+          </Select>
+        </FormControl>
       </div>
       {showPaymentModule && (
         <>
