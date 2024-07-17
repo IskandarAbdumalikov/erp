@@ -10,6 +10,8 @@ import Customer from "./pages/admin/customer/Customer";
 import SinglePage from "./pages/singleCustomer/SinglePage";
 import CreateCustomer from "./pages/createCustomer/CreateCustomer";
 import EditCustomer from "./pages/singleCustomer/EditCustomer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
@@ -31,6 +33,7 @@ const App = () => {
           </Route>
         </Route>
       </Routes>
+      <ToastContainer />
     </>
   );
 };

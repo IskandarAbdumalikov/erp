@@ -13,6 +13,9 @@ import { BsPinAngle } from "react-icons/bs";
 import { RiUnpinLine } from "react-icons/ri";
 import { useCreatePaymentMutation } from "../../../context/paymentApi";
 import Module from "../../../components/module/Module";
+import Pagination from "@mui/material/Pagination";
+import PaginationItem from "@mui/material/PaginationItem";
+import Stack from "@mui/material/Stack";
 
 const initialState = {
   customerId: "",
@@ -21,7 +24,9 @@ const initialState = {
 };
 
 const Customer = () => {
-  const { data } = useGetCustomersQuery();
+  const [skip, setSkip] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const { data } = useGetCustomersQuery({ limit, skip: skip - 1 });
   const [showParams, setShowParams] = useState("");
   const [pinCustomer] = usePinCustomerMutation();
   const [showPaymentModule, setShowPaymentModule] = useState(false);
@@ -29,13 +34,11 @@ const Customer = () => {
 
   const [createPayment, { isSuccess }] = useCreatePaymentMutation();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const handleChangePagination = (event, value) => {
+    setSkip(value);
   };
+  console.log(skip);
+
   useEffect(() => {
     if (isSuccess) {
       setShowPaymentModule(false);
@@ -49,6 +52,14 @@ const Customer = () => {
     } else {
       console.error("customerId is required");
     }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   const handlePinCustomer = (customer) => {
@@ -139,6 +150,13 @@ const Customer = () => {
           ))}
         </tbody>
       </table>
+      <Stack spacing={2}>
+        <Pagination
+          count={data?.totalCount ? Math.ceil(data.totalCount / limit) : 1}
+          page={skip}
+          onChange={handleChangePagination}
+        />
+      </Stack>
       {showPaymentModule && (
         <>
           <Module>
