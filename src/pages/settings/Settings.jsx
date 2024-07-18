@@ -45,10 +45,10 @@ const Settings = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
     try {
-      await updateProfile(formData).unwrap();
+      updateProfile(formData).unwrap();
       setShowEdit(false);
       navigate("/admin/settings");
     } catch (err) {
