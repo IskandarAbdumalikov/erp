@@ -34,6 +34,14 @@
           text-align: start;
         }
       }
+      .td {
+        position: relative;
+        .pin-btn {
+          position: absolute;
+          top: -5px;
+          left: -15px;
+        }
+      }
     }
   }
 
@@ -46,7 +54,7 @@
     }
     &__module {
       position: absolute;
-      top: -75px;
+      top: -150%;
       left: 0px;
       right: 0px;
       width: 100%;
@@ -59,6 +67,15 @@
       border-radius: 5px;
       padding: 5px;
       z-index: 99;
+      a {
+        padding: 2px;
+        border-radius: 2px;
+      }
+      a:hover {
+        background: #4880ff;
+        color: white;
+        transition: 0.3s;
+      }
     }
   }
 
@@ -70,6 +87,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 5px;
+    margin: 10px auto;
   }
   .incomer {
     color: #00b69b;
@@ -102,7 +120,7 @@
     padding: 10px 20px;
     border: 1px solid gray;
     border-radius: 5px;
-    option{
+    option {
       padding: 10px;
     }
   }

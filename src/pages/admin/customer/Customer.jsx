@@ -16,7 +16,13 @@ import Module from "../../../components/module/Module";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import Stack from "@mui/material/Stack";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 
 const initialState = {
   customerId: "",
@@ -87,13 +93,30 @@ const Customer = () => {
             <th>MANZIL</th>
             <th>TELEFON NO`MER</th>
             <th>HISOB</th>
-            <th>PRAMETRLAR</th>
+            <th>PARAMETRLAR</th>
           </tr>
         </thead>
         <tbody>
           {data?.innerData?.map((el) => (
             <tr key={el._id}>
-              <td>{el._id}</td>
+              <td className="td">
+                <Button
+                  className="pin-btn"
+                  onDoubleClick={() => handlePinCustomer(el)}
+                  variant="text"
+                >
+                  {el.pin ? (
+                    <>
+                      <RiUnpinLine />
+                    </>
+                  ) : (
+                    <>
+                      <BsPinAngle />
+                    </>
+                  )}
+                </Button>
+                {el._id}
+              </td>
               <td>
                 {el.lname} {el.fname}
               </td>
@@ -124,7 +147,7 @@ const Customer = () => {
                     onClick={() => setShowParams("")}
                     className="params__module"
                   >
-                    <Link style={{ color: "blue" }} to={`${el._id}`}>
+                    <Link to={`${el._id}`}>
                       <TbListDetails /> Batafsil
                     </Link>
                     <Link onClick={() => handleShowPaymentModule(el._id)}>

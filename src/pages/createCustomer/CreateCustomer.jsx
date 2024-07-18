@@ -3,6 +3,7 @@ import "../register/register.scss";
 import { useNavigate } from "react-router-dom";
 import { useRegisterCustomerMutation } from "../../context/customerApi";
 import "./createCustomer.scss";
+import { PatternFormat } from "react-number-format";
 
 const initialState = {
   fname: "",
@@ -74,14 +75,16 @@ const CreateCustomer = () => {
         </div>
         <div>
           <label htmlFor="phone_primary">Telefon no`meri</label>
-          <input
+          <PatternFormat
+            format="+998 (##) ###-####"
             type="text"
             id="phone_primary"
             name="phone_primary"
-            placeholder="Telefon no`meri"
-            value={formData.phone_primary}
+            placeholder="+998 (12) 345-6789"
+            value={""}
             onChange={handleChange}
             required
+            valueIsNumericString={true}
           />
         </div>
         <div>

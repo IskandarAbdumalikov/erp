@@ -1,3 +1,24 @@
+.admin__header__right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-right: 20px;
+  .button-log-out {
+    border: none;
+    color: black;
+    outline: none;
+  }
+  .button-log-out:hover {
+    border: none;
+    color: black;
+    outline: none;
+  }
+  .log-out-btn {
+    font-size: 30px !important;
+    width: 30px !important;
+  }
+}
+
 .form__search {
   position: relative;
   .search__module {
@@ -12,14 +33,14 @@
     padding: 10px;
     box-shadow: 0px 0px 5px gray;
     border-radius: 5px;
-    &__card{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        p{
-            font-size: 13px;
-        }
+    &__card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      p {
+        font-size: 13px;
+      }
     }
   }
 }
