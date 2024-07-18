@@ -118,7 +118,7 @@ const Customer = () => {
                 {el._id}
               </td>
               <td>
-                {el.lname} {el.fname}
+                {el.fname} {el.lname}
               </td>
               <td>{el.address}</td>
               <td>{el.phone_primary}</td>
@@ -191,12 +191,12 @@ const Customer = () => {
           />
         </Stack>
         <FormControl style={{ maxWidth: 200 }} fullWidth>
-          <InputLabel id="demo-simple-select-label">Age</InputLabel>
+          <InputLabel id="demo-simple-select-label">Limit</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={limit}
-            label="Age"
+            label="Limit"
             onChange={(e) => setLimit(e.target.value)}
           >
             <MenuItem value={10}>10</MenuItem>
