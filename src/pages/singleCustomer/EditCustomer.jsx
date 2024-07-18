@@ -4,6 +4,7 @@ import {
   useGetSingleCustomerQuery,
   useUpdateCustomerMutation,
 } from "../../context/customerApi";
+import { PatternFormat } from "react-number-format";
 
 const EditCustomer = () => {
   const { customerId } = useParams();
@@ -53,26 +54,23 @@ const EditCustomer = () => {
       <h2>Customer Edit Page</h2>
       <form onSubmit={handleSubmit}>
         <input
-         autoFocus
+          autoFocus
           type="text"
           name="fname"
           placeholder="Ismi"
           value={formData.fname}
           onChange={handleChange}
         />
-        <input
-          type="text"
-          name="lname"
-          placeholder="Familiysai"
-          value={formData.lname}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
+        <PatternFormat
+          format="+998 (##) ###-####"
+          id="phone_primary"
           name="phone_primary"
-          placeholder="Telefon no`meri"
+          placeholder="+998 (12) 345-6789"
+          type="text"
           value={formData.phone_primary}
           onChange={handleChange}
+          required
+          valueIsNumericString={true}
         />
         <input
           type="text"

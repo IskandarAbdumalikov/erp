@@ -12,6 +12,7 @@ import CreateCustomer from "./pages/createCustomer/CreateCustomer";
 import EditCustomer from "./pages/singleCustomer/EditCustomer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Settings from "./pages/settings/Settings";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route path="saller" element={<Saller />} />
             <Route path="customers" element={<Customer />} />
             <Route path="create-customers" element={<CreateCustomer />} />
+            <Route path="settings" element={<Settings />} />
             <Route path={`customers/:customerId`} element={<SinglePage />} />
             <Route
               path={`edit-customer/:customerId`}
