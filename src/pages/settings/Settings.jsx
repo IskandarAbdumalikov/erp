@@ -90,7 +90,7 @@ const Settings = () => {
           </li>
           <li>
             <label htmlFor="phone_primary">Telefon raqam</label>
-            <h3>{user?.phone_primary}</h3>
+            <h3>+{user?.phone_primary}</h3>
           </li>
           <li>
             <label htmlFor="lname">Familiya</label>

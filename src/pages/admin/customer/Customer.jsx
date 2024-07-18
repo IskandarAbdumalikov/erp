@@ -15,6 +15,7 @@ import { useCreatePaymentMutation } from "../../../context/paymentApi";
 import Module from "../../../components/module/Module";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
+import { IoCheckmarkDone } from "react-icons/io5";
 import Stack from "@mui/material/Stack";
 import {
   Button,
@@ -23,6 +24,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+import { useGetProfileQuery } from "../../../context/adminSlice";
 
 const initialState = {
   customerId: "",
@@ -44,7 +46,9 @@ const Customer = () => {
   const handleChangePagination = (event, value) => {
     setSkip(value);
   };
-  console.log(skip);
+  let { data: profileData } = useGetProfileQuery();
+  let profileDay = profileData?.innerData?.date?.split("T")[0];
+  console.log(profileDay);
 
   useEffect(() => {
     if (isSuccess) {
@@ -176,6 +180,13 @@ const Customer = () => {
                   <button onClick={() => setShowParams(el._id)}>
                     <FaEllipsis />
                   </button>
+                )}
+                {el?.isPaidToday?.split("T")[0] == profileDay ? (
+                  <p className="check" style={{ color: "green" }}>
+                    <IoCheckmarkDone />
+                  </p>
+                ) : (
+                  <></>
                 )}
               </td>
             </tr>
