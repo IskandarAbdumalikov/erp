@@ -14,12 +14,12 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar">
-      <h2 className="sidebar__logo">
-        <Link>
+      <Link to={"settings"} className="sidebar__logo">
+        <Link to={"settings"}>
           <Avatar sx={{ bgcolor: "#4880ff" }}>{avatar}</Avatar>
         </Link>
-        <span>{user?.fname}</span>
-      </h2>
+        <h2>{user?.fname}</h2>
+      </Link>
       <ul className="sidebar__collection">
         <li className="sidebar__item">
           <NavLink className={"sidebar__link"} to={"create-customers"}>

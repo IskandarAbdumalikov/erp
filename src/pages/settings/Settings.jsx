@@ -45,7 +45,7 @@ const Settings = () => {
     });
   };
 
-  const handleSubmit =  (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     try {
       updateProfile(formData).unwrap();
@@ -132,6 +132,7 @@ const Settings = () => {
               value={formData.lname}
               onChange={handleChange}
             />
+
             <PatternFormat
               format="+998 (##) ###-####"
               id="phone_primary"
@@ -155,6 +156,13 @@ const Settings = () => {
               name="password"
               placeholder="Paroli"
               value={formData.password}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              name="isActive"
+              placeholder="Activligi true/false"
+              value={formData.isActive}
               onChange={handleChange}
             />
             <button type="submit">Yangilash</button>

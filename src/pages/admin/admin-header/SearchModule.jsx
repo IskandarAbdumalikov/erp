@@ -1,9 +1,12 @@
 import React from "react";
 import { useGetSellersBySearchQuery } from "../../../context/sellerApi";
+import { useGetCustomersBySearchQuery } from "../../../context/customerApi";
+import { Link } from "react-router-dom";
 
-const SearchModule = ({ search }) => {
-  let { data, isError } = useGetSellersBySearchQuery({ value: search });
-  console.log(data);
+const SearchModule = ({ search, setSearch }) => {
+  let { data, isError } = useGetCustomersBySearchQuery({ value: search });
+  console.log(search);
+
   return (
     <>
       {isError ? (
@@ -11,13 +14,17 @@ const SearchModule = ({ search }) => {
       ) : (
         <div className="search__module">
           {data?.innerData?.map((el) => (
-            <div className="search__module__card">
+            <Link
+              onClick={() => setSearch("")}
+              to={`/admin/customers/${el._id}`}
+              className="search__module__card"
+            >
               <p>
                 {el.fname} {el.lname}
               </p>{" "}
               <p>{el.phone_primary}</p>
               <p>{el.budget}</p>
-            </div>
+            </Link>
           ))}
         </div>
       )}

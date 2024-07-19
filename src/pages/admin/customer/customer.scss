@@ -59,7 +59,7 @@
     }
     &__module {
       position: absolute;
-      top: -150%;
+      top: -200%;
       left: 0px;
       right: 0px;
       width: 100%;
@@ -128,5 +128,25 @@
     option {
       padding: 10px;
     }
+  }
+}
+
+.message__module{
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 20px;
+  textarea{
+    padding: 10px;
+    font-size: 18px;
+    min-height: 100px;
+    max-height: 150px;
+    max-width: 400px;
+    min-width: 200px;
+  }
+  &__btns{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
   }
 }

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { FaEllipsis } from "react-icons/fa6";
 import { ImCancelCircle } from "react-icons/im";
 import { TbListDetails } from "react-icons/tb";
-import { MdPayments } from "react-icons/md";
+import { MdMessage, MdPayments } from "react-icons/md";
 import { BsPinAngle } from "react-icons/bs";
 import { RiUnpinLine } from "react-icons/ri";
 import { useCreatePaymentMutation } from "../../../context/paymentApi";
@@ -40,6 +40,13 @@ const Customer = () => {
   const [pinCustomer] = usePinCustomerMutation();
   const [showPaymentModule, setShowPaymentModule] = useState(false);
   const [formData, setFormData] = useState(initialState);
+  const BOT_TOKEN = "7313879684:AAH0lhoKddXhkYP-YO5QnYueauqqT3J9hzE";
+  const CHAT_ID = "-1002180292093";
+
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [amount, setAmount] = useState("");
+  const [showMessageModule, setShowMessageModule] = useState(false);
 
   const [createPayment, { isSuccess }] = useCreatePaymentMutation();
 
@@ -85,6 +92,30 @@ const Customer = () => {
     setShowPaymentModule(true);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let text = `Mijozga habarnoma %0A`;
+    text += `Assalom ualeykum qadrli ${name} siz bizdan ${amount} so'm miqdorda qarzdor ekansiz %0A%0A`;
+    text += `Iltimosimiz: ${message ? message : "shu"} %0A%0A`;
+    text += `Miqdori: ${amount} so'm%0A%0A`;
+
+    let url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${text}`;
+    let api = new XMLHttpRequest();
+    api.open("GET", url, true);
+    api.send();
+    setShowMessageModule(false);
+
+    setMessage("");
+    setAmount("");
+    setName("");
+  };
+
+  const saveDatas = (name, amount) => {
+    setName(name);
+    setAmount(amount);
+    setShowMessageModule(true);
+  };
+
   return (
     <div className="customer">
       <h1>Order Lists</h1>
@@ -124,8 +155,17 @@ const Customer = () => {
               <td>
                 {el.fname} {el.lname}
               </td>
-              <td>{el.address}</td>
-              <td>{el.phone_primary}</td>
+              <td>
+                <a
+                  target="_blank"
+                  href={`https://maps.google.com/maps?q=${el.address}`}
+                >
+                  {el.address}
+                </a>
+              </td>
+              <td>
+                <a href={`tel:${el.phone_primary}`}>{el.phone_primary}</a>
+              </td>
               <td
                 className={`customer__budget ${
                   el.budget > 0
@@ -137,6 +177,31 @@ const Customer = () => {
               >
                 {el.budget}
               </td>
+              {showMessageModule ? (
+                <Module>
+                  <form className="message__module" onSubmit={handleSubmit}>
+                    <textarea
+                      type="text"
+                      name="habar"
+                      placeholder="habar"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                    />
+                    <div className="message__module__btns">
+                      <button type="submit">Yuborish</button>
+                      <button
+                        className="cancel-btn"
+                        onClick={() => setShowMessageModule(false)}
+                        type="button"
+                      >
+                        Bekor qilish
+                      </button>
+                    </div>
+                  </form>
+                </Module>
+              ) : (
+                <></>
+              )}
               <td className="params">
                 {showParams === el._id ? (
                   <div
@@ -156,6 +221,13 @@ const Customer = () => {
                     </Link>
                     <Link onClick={() => handleShowPaymentModule(el._id)}>
                       <MdPayments /> To`lov
+                    </Link>
+                    <Link
+                      onClick={() =>
+                        saveDatas(`${el.fname} ${el.lname}`, el.budget)
+                      }
+                    >
+                      <MdMessage /> Habar yuborish
                     </Link>
                     <Link onClick={() => handlePinCustomer(el)}>
                       {el.pin ? (
@@ -255,6 +327,14 @@ const Customer = () => {
             className="overlay"
           ></div>
         </>
+      )}
+      {showMessageModule ? (
+        <div
+          onClick={() => setShowMessageModule(false)}
+          className="overlay"
+        ></div>
+      ) : (
+        <></>
       )}
     </div>
   );

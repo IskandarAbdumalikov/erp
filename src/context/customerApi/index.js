@@ -16,8 +16,9 @@ export const customerApi = api.injectEndpoints({
       providesTags: ["Customer", "Payment"],
     }),
     getCustomersBySearch: build.query({
-      query: (search) => ({
-        url: `/get/customers/search/${search}`,
+      query: (params) => ({
+        url: `/get/customers/search`,
+        params,
       }),
       providesTags: ["Customer", "Payment"],
     }),

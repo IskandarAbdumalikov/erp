@@ -80,7 +80,19 @@ const AdminHeader = ({ setClose }) => {
             value={search}
             type="text"
           />
-          {search ? <SearchModule search={search} /> : <></>}
+          {search ? (
+            <SearchModule search={search} setSearch={setSearch} />
+          ) : (
+            <></>
+          )}
+          {search ? (
+            <div
+              onClick={() => setSearch("")}
+              className="overlay-transparent"
+            ></div>
+          ) : (
+            <></>
+          )}
         </form>
       </div>
       <div className="admin__header__right">

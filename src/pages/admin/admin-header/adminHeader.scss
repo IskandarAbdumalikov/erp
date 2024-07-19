@@ -33,6 +33,7 @@
     padding: 10px;
     box-shadow: 0px 0px 5px gray;
     border-radius: 5px;
+    z-index: 999;
     &__card {
       display: flex;
       align-items: center;

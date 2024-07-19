@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../../context/authSlice/authSlice";
 
 const Login = () => {
-  const [username, setUsername] = useState("iskandar2007");
+  const [username, setUsername] = useState("iskandar1016");
   let dispatch = useDispatch();
-  const [password, setPassword] = useState("iskandar2007");
+  const [password, setPassword] = useState("iskandar1016");
   const [signIn, { data, isLoading, isSuccess, isError, error }] =
     useSignInMutation();
   let navigate = useNavigate();
