@@ -7,12 +7,14 @@ import { api } from "./api";
 import authSlice from "./authSlice/authSlice";
 import { paymentApi } from "./paymentApi";
 import { profileApi } from "./profileApi";
+import { expenseApi } from "./expenseApi";
 
 export const store = configureStore({
   reducer: {
     auth: authSlice,
     [api.reducerPath]: api.reducer,
     [customerApi.reducerPath]: customerApi.reducer,
+    [expenseApi.reducerPath]: expenseApi.reducer,
     [profileApi.reducerPath]: profileApi.reducer,
     [paymentApi.reducerPath]: paymentApi.reducer,
     [productApi.reducerPath]: productApi.reducer,
@@ -21,6 +23,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(productApi.middleware)
+      .concat(expenseApi.middleware)
       .concat(profileApi.middleware)
       .concat(paymentApi.middleware)
       .concat(customerApi.middleware)

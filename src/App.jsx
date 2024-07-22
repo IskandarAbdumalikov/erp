@@ -9,6 +9,7 @@ import Saller from "./pages/admin/saller/Saller";
 import Customer from "./pages/admin/customer/Customer";
 import SinglePage from "./pages/singleCustomer/SinglePage";
 import CreateCustomer from "./pages/createCustomer/CreateCustomer";
+import SingleSeller from "./pages/singleSeller/SingleSeller";
 import EditCustomer from "./pages/singleCustomer/EditCustomer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,7 +24,8 @@ const App = () => {
         <Route path="/" element={<Auth />}>
           <Route path="admin" element={<Admin />}>
             <Route path="store" element={<AdminStore />} />
-            <Route path="saller" element={<Saller />} />
+            <Route path="seller" element={<Saller />} />
+            <Route path="seller/:sellerId" element={<SingleSeller />} />
             <Route path="customers" element={<Customer />} />
             <Route path="create-customers" element={<CreateCustomer />} />
             <Route path="settings" element={<Settings />} />

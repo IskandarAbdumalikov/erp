@@ -7,14 +7,20 @@ export const sellerApi = api.injectEndpoints({
         url: "get/sellers",
         params,
       }),
-      providesTags: ["Seller"],
+      providesTags: ["Seller", "Expense"],
+    }),
+    getSingleSeller: build.query({
+      query: (id) => ({
+        url: `get/seller/${id}`,
+      }),
+      providesTags: ["Seller", "Expense"],
     }),
     getSellersBySearch: build.query({
       query: (params) => ({
         url: "get/sellers/search",
         params,
       }),
-      providesTags: ["Seller"],
+      providesTags: ["Seller", "Expense"],
     }),
     loginSeller: build.mutation({
       query: (body) => ({
@@ -40,4 +46,5 @@ export const {
   useGetSellersBySearchQuery,
   useRegisterSellerMutation,
   useLoginSellerMutation,
+  useGetSingleSellerQuery,
 } = sellerApi;

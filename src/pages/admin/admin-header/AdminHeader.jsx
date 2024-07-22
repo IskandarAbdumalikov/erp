@@ -69,7 +69,6 @@ const AdminHeader = ({ setClose }) => {
 
   return (
     <div className="admin__header">
-      
       <div
         className={`admin__header__left ${
           showInput ? "show__input__header" : ""
@@ -110,7 +109,6 @@ const AdminHeader = ({ setClose }) => {
           {search && <SearchModule search={search} setSearch={setSearch} />}
         </form>
       </div>{" "}
-     
       <div className="admin__header__right">
         <ReactFlagsSelect
           className="lang-select"

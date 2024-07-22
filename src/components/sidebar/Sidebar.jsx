@@ -35,7 +35,7 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li className="sidebar__item">
-          <NavLink className={"sidebar__link"} to={"saller"}>
+          <NavLink className={"sidebar__link"} to={"seller"}>
             <FaHandshake />
             Sotuvchilar
           </NavLink>

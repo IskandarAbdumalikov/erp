@@ -5,10 +5,10 @@ import { FaUser } from "react-icons/fa6";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-const MenuModule = ({ handleClickOpen, handleLanguageChange ,t}) => {
+const MenuModule = ({ handleClickOpen, handleLanguageChange, t }) => {
   return (
     <div className="admin__header__show-module">
-      <Button
+      <Link
         variant="outlined"
         className="button-log-out"
         onClick={handleClickOpen}
@@ -17,13 +17,11 @@ const MenuModule = ({ handleClickOpen, handleLanguageChange ,t}) => {
           icon="pi pi-check"
           label="Confirm"
           className={"log-out-btn"}
-        />{" "}
-        Chiqish
-      </Button>
+        />
+        <p>Chiqish</p>
+      </Link>
       <Link to={"settings"}>
-        <Button>
-          <FaUser /> Profil
-        </Button>
+        <FaUser /> <p>Profil</p>
       </Link>
       <ReactFlagsSelect
         className="lang-select__media"
