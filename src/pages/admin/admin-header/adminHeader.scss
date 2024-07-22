@@ -26,11 +26,6 @@
       max-width: 200px;
 
       a {
-        svg {
-          font-size: 25px !important;
-          width: 25px !important;
-          height: 25px;
-        }
         transition: 0.3s;
         padding: 5px;
         width: 100%;
@@ -42,6 +37,11 @@
         &:hover {
           background: #4880ff;
           color: white;
+        }
+        svg {
+          font-size: 25px !important;
+          width: 25px !important;
+          height: 25px;
         }
       }
     }
