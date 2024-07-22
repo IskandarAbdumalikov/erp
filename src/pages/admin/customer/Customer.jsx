@@ -23,8 +23,9 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Skeleton,
 } from "@mui/material";
-import { useGetProfileQuery } from "../../../context/adminSlice";
+import { useGetProfileQuery } from "../../../context/profileApi";
 
 const initialState = {
   customerId: "",
@@ -33,20 +34,31 @@ const initialState = {
 };
 
 const Customer = () => {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [amount, setAmount] = useState("");
+  const [paidToday, setPaidToday] = useState("0");
+  const [debt, setDebt] = useState("2");
+  const [budget, setBudget] = useState("0");
+  const [createdAt, setCreatedAt] = useState("-1");
+  const [showMessageModule, setShowMessageModule] = useState(false);
   const [skip, setSkip] = useState(1);
   const [limit, setLimit] = useState(10);
-  const { data } = useGetCustomersQuery({ limit, skip: skip - 1 });
+  const [showSort, setShowSort] = useState(true);
+  const { data, isLoading, isFetching } = useGetCustomersQuery({
+    limit,
+    skip: skip - 1,
+    paidToday,
+    debt,
+    createdAt,
+    budget,
+  });
   const [showParams, setShowParams] = useState("");
   const [pinCustomer] = usePinCustomerMutation();
   const [showPaymentModule, setShowPaymentModule] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const BOT_TOKEN = "7313879684:AAH0lhoKddXhkYP-YO5QnYueauqqT3J9hzE";
   const CHAT_ID = "-1002180292093";
-
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-  const [amount, setAmount] = useState("");
-  const [showMessageModule, setShowMessageModule] = useState(false);
 
   const [createPayment, { isSuccess }] = useCreatePaymentMutation();
 
@@ -62,6 +74,26 @@ const Customer = () => {
       setShowPaymentModule(false);
     }
   }, [isSuccess]);
+
+  let handleSortByCreatedBy = (n) => {
+    setBudget("0");
+    setSkip(1);
+    setCreatedAt(n);
+  };
+  let handleSortByBudget = (n) => {
+    setBudget(n);
+    setSkip(1);
+    setCreatedAt("");
+  };
+
+  let handleFilterByDebt = (n) => {
+    setSkip(1);
+    setDebt(n);
+  };
+  let handleFilterByPaidToday = (n) => {
+    setSkip(1);
+    setPaidToday(n);
+  };
 
   const handleCreatePaymentSubmit = (e) => {
     e.preventDefault();
@@ -116,155 +148,219 @@ const Customer = () => {
     setShowMessageModule(true);
   };
 
+  const handleReset = () => {
+    setPaidToday("0");
+    setDebt("2");
+    setBudget("0");
+    setCreatedAt("");
+  };
+
   return (
     <div className="customer">
       <h1>Order Lists</h1>
-      <div></div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>ISM VA FAMILIYA</th>
-            <th>MANZIL</th>
-            <th>TELEFON NO`MER</th>
-            <th>HISOB</th>
-            <th>PARAMETRLAR</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data?.innerData?.map((el) => (
-            <tr key={el._id}>
-              <td className="td">
-                <Button
-                  className="pin-btn"
-                  onDoubleClick={() => handlePinCustomer(el)}
-                  variant="text"
-                >
-                  {el.pin ? (
-                    <>
-                      <RiUnpinLine />
-                    </>
-                  ) : (
-                    <>
-                      <BsPinAngle />
-                    </>
-                  )}
-                </Button>
-                {el._id}
-              </td>
-              <td>
-                {el.fname} {el.lname}
-              </td>
-              <td>
-                <a
-                  target="_blank"
-                  href={`https://maps.google.com/maps?q=${el.address}`}
-                >
-                  {el.address}
-                </a>
-              </td>
-              <td>
-                <a href={`tel:${el.phone_primary}`}>{el.phone_primary}</a>
-              </td>
-              <td
-                className={`customer__budget ${
-                  el.budget > 0
-                    ? "incomer"
-                    : el.budget === 0
-                    ? "nothing"
-                    : "outcomer"
-                } `}
-              >
-                {el.budget}
-              </td>
-              {showMessageModule ? (
-                <Module>
-                  <form className="message__module" onSubmit={handleSubmit}>
-                    <textarea
-                      type="text"
-                      name="habar"
-                      placeholder="habar"
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                    />
-                    <div className="message__module__btns">
-                      <button type="submit">Yuborish</button>
-                      <button
-                        className="cancel-btn"
-                        onClick={() => setShowMessageModule(false)}
-                        type="button"
-                      >
-                        Bekor qilish
-                      </button>
-                    </div>
-                  </form>
-                </Module>
-              ) : (
-                <></>
-              )}
-              <td className="params">
-                {showParams === el._id ? (
-                  <div
-                    onClick={() => setShowParams("")}
-                    className="overlay-transparent"
-                  ></div>
-                ) : (
-                  <></>
-                )}
-                {showParams === el._id ? (
-                  <div
-                    onClick={() => setShowParams("")}
-                    className="params__module"
-                  >
-                    <Link to={`${el._id}`}>
-                      <TbListDetails /> Batafsil
-                    </Link>
-                    <Link onClick={() => handleShowPaymentModule(el._id)}>
-                      <MdPayments /> To`lov
-                    </Link>
-                    <Link
-                      onClick={() =>
-                        saveDatas(`${el.fname} ${el.lname}`, el.budget)
-                      }
-                    >
-                      <MdMessage /> Habar yuborish
-                    </Link>
-                    <Link onClick={() => handlePinCustomer(el)}>
-                      {el.pin ? (
-                        <>
-                          <RiUnpinLine /> Unpin qilish
-                        </>
-                      ) : (
-                        <>
-                          <BsPinAngle /> Pin qilish
-                        </>
-                      )}
-                    </Link>
-                  </div>
-                ) : (
-                  <></>
-                )}
-                {showParams === el._id ? (
-                  <button onClick={() => setShowParams("")}>
-                    <ImCancelCircle />
-                  </button>
-                ) : (
-                  <button onClick={() => setShowParams(el._id)}>
-                    <FaEllipsis />
-                  </button>
-                )}
-                {el?.isPaidToday?.split("T")[0] == profileDay ? (
-                  <p className="check" style={{ color: "green" }}>
-                    <IoCheckmarkDone />
-                  </p>
-                ) : (
-                  <></>
-                )}
-              </td>
+      <div className="customer__filters">
+        <label htmlFor="paidToday">
+          <p>To`l`ov qilganlarni saralash</p>
+          <select
+            onChange={(e) => handleFilterByPaidToday(e.target.value)}
+            name=""
+            id="paidToday"
+            value={paidToday}
+          >
+            <option value="0">Barchasi </option>
+            <option value="1">Tolov qilgan</option>
+            <option value="-1">Tolov qilmagan</option>
+          </select>
+        </label>
+        <label htmlFor="debt">
+          <p>Qarzdorlarni saralash</p>
+          <select
+            onChange={(e) => handleFilterByDebt(e.target.value)}
+            name=""
+            id="debt"
+            value={debt}
+          >
+            <option value="2">Barchasi </option>
+            <option value="-1">Qarzdorlar</option>
+            <option value="1">Haqdorlar</option>
+            <option value="0">Raschyotlar</option>
+          </select>
+        </label>
+        <label htmlFor="budget">
+          <p>Pulga qarab chiqarish</p>
+          <select
+            onChange={(e) => handleSortByBudget(e.target.value)}
+            name=""
+            id="budget"
+            value={budget}
+          >
+            <option value="">Barchasi </option>
+            <option value="1">Kamayish bo`yicha</option>
+            <option value="-1">o`sish bo`yicha</option>
+          </select>
+        </label>
+        <label htmlFor="createdAt">
+          <p>Yaratilganligiga qarab chiqarish</p>
+          <select
+            onChange={(e) => handleSortByCreatedBy(e.target.value)}
+            name=""
+            id="createdAt"
+            value={createdAt}
+          >
+            <option value="">Barchasi </option>
+            <option value="-1">Eng yangilar</option>
+            <option value="1">Eng eskilar</option>
+          </select>
+        </label>
+        <label htmlFor="">
+          <p>Asliga qaytarish</p>
+          <button onClick={() => handleReset()}>Asliga qaytarish</button>
+        </label>
+      </div>
+
+      <div class="table-container">
+        <table class="responsive-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>ISM VA FAMILIYA</th>
+              <th>MANZIL</th>
+              <th>TELEFON NO`MER</th>
+              <th>HISOB</th>
+              <th>PARAMETRLAR</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {data?.innerData?.map((el) => (
+              <tr key={el._id}>
+                <td className="td">
+                  <Button
+                    className="pin-btn"
+                    onDoubleClick={() => handlePinCustomer(el)}
+                    variant="text"
+                  >
+                    {el.pin ? <RiUnpinLine /> : <BsPinAngle />}
+                  </Button>
+                  <h3>ID</h3>
+                  <p>{el._id}</p>
+                </td>
+                <td>
+                  <h3>ISM VA FAMILIYA</h3>
+                  <p>
+                    {el.fname} {el.lname}
+                  </p>
+                </td>
+                <td>
+                  <h3>MANZIL</h3>
+                  <a
+                    target="_blank"
+                    href={`https://maps.google.com/maps?q=${el.address}`}
+                  >
+                    {el.address}
+                  </a>
+                </td>
+                <td>
+                  <h3>TELEFON NO`MER</h3>
+                  <a href={`tel:${el.phone_primary}`}>{el.phone_primary}</a>
+                </td>
+                <td
+                  className={`customer__budget ${
+                    el.budget > 0
+                      ? "incomer"
+                      : el.budget === 0
+                      ? "nothing"
+                      : "outcomer"
+                  }`}
+                >
+                  <h3>HISOB</h3>
+                  <p> {el.budget}</p>
+                </td>
+
+                <td
+                  className={`customer__budget__media ${
+                    el.budget > 0
+                      ? "incomer"
+                      : el.budget === 0
+                      ? "nothing"
+                      : "outcomer"
+                  }`}
+                >
+                  <h3>HISOB</h3>
+                  <p> {el.budget}</p>
+                </td>
+                <td className="params">
+                  <h3>PARAMETRLAR</h3>
+                  {showParams === el._id ? (
+                    <div
+                      onClick={() => setShowParams("")}
+                      className="overlay-transparent"
+                    ></div>
+                  ) : null}
+                  {showParams === el._id ? (
+                    <div
+                      onClick={() => setShowParams("")}
+                      className="params__module"
+                    >
+                      <Link to={`${el._id}`}>
+                        <TbListDetails /> Batafsil
+                      </Link>
+                      <Link onClick={() => handleShowPaymentModule(el._id)}>
+                        <MdPayments /> To`lov
+                      </Link>
+                      <Link
+                        onClick={() =>
+                          saveDatas(`${el.fname} ${el.lname}`, el.budget)
+                        }
+                      >
+                        <MdMessage /> Habar yuborish
+                      </Link>
+                      <Link onClick={() => handlePinCustomer(el)}>
+                        {el.pin ? (
+                          <>
+                            <RiUnpinLine /> Unpin qilish
+                          </>
+                        ) : (
+                          <>
+                            <BsPinAngle /> Pin qilish
+                          </>
+                        )}
+                      </Link>
+                    </div>
+                  ) : null}
+                  {showParams === el._id ? (
+                    <button onClick={() => setShowParams("")}>
+                      <ImCancelCircle />
+                    </button>
+                  ) : (
+                    <button onClick={() => setShowParams(el._id)}>
+                      <FaEllipsis />
+                    </button>
+                  )}
+                  {el?.isPaidToday?.split("T")[0] === profileDay ? (
+                    <p className="check" style={{ color: "green" }}>
+                      <IoCheckmarkDone />
+                    </p>
+                  ) : null}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {isLoading && isFetching ? (
+          <div className="table__skaleton">
+            <Skeleton height={70} animation="wave" />
+            <Skeleton height={70} animation="wave" />
+            <Skeleton height={70} animation="wave" />
+            <Skeleton height={70} animation="wave" />
+            <Skeleton height={70} animation="wave" />
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
+
       <div className="pagination">
         <Stack spacing={2}>
           <Pagination
@@ -333,6 +429,31 @@ const Customer = () => {
           onClick={() => setShowMessageModule(false)}
           className="overlay"
         ></div>
+      ) : (
+        <></>
+      )}
+      {showMessageModule ? (
+        <Module>
+          <form className="message__module" onSubmit={handleSubmit}>
+            <textarea
+              type="text"
+              name="habar"
+              placeholder="habar"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <div className="message__module__btns">
+              <button type="submit">Yuborish</button>
+              <button
+                className="cancel-btn"
+                onClick={() => setShowMessageModule(false)}
+                type="button"
+              >
+                Bekor qilish
+              </button>
+            </div>
+          </form>
+        </Module>
       ) : (
         <></>
       )}

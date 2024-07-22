@@ -1,45 +1,83 @@
 .customer {
   padding: 1rem;
+  &__filters {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    label {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      p {
+        text-wrap: nowrap;
+      }
+      select {
+        padding: 10px 20px;
+        border: 1px solid gray;
+        outline: none;
+        border-radius: 5px;
+      }
+    }
+    button {
+      padding: 10px 20px;
+      border: 1px solid #4880ff;
+      border-radius: 5px;
+      background: #4880ff;
+      color: white;
+    }
+  }
 
   h1 {
     margin-bottom: 1rem;
   }
 
-  table {
+  .table-container {
+    width: 100%;
+    padding: 0px;
+  }
+
+  .responsive-table {
     width: 100%;
     border-collapse: collapse;
     margin: 1rem 0;
     border-radius: 10px;
     background: white;
+
     thead {
       tr {
         padding: 18px 20px;
         border: 1px solid #ddd;
         text-align: start;
+
         th {
           text-align: start;
           padding: 10px 20px;
         }
       }
     }
+   
 
     tbody {
       tr {
         border: 1px solid #ddd;
         text-align: start;
+        width: 100%;
 
         td {
           padding: 18px 20px;
-
           text-align: start;
-        }
-      }
-      .td {
-        position: relative;
-        .pin-btn {
-          position: absolute;
-          top: -5px;
-          left: -15px;
+          position: relative;
+
+          h3 {
+            display: none;
+          }
+
+          .pin-btn {
+            position: absolute;
+            top: -5px;
+            left: -15px;
+          }
         }
       }
     }
@@ -47,21 +85,24 @@
 
   .params {
     position: relative;
+
     button {
       background: transparent;
       border: none;
       font-size: 18px;
     }
-    .check{
+
+    .check {
       position: absolute;
       top: 10px;
       right: 100px;
     }
+
     &__module {
       position: absolute;
       top: -200%;
-      left: 0px;
-      right: 0px;
+      left: 0;
+      right: 0;
       width: 100%;
       max-height: 400px;
       display: flex;
@@ -72,10 +113,12 @@
       border-radius: 5px;
       padding: 5px;
       z-index: 99;
+
       a {
         padding: 2px;
         border-radius: 2px;
       }
+
       a:hover {
         background: #4880ff;
         color: white;
@@ -94,59 +137,262 @@
     border-radius: 5px;
     margin: 10px auto;
   }
+  .customer__budget__media {
+    display: none;
+  }
+
   .incomer {
     color: #00b69b;
-    background: #ccf0eb;
   }
+
   .nothing {
     color: #6226ef;
-    background: #e0d4fc;
   }
+
   .outcomer {
     color: #ef3826;
-    background: #fcd7d4;
   }
-  @media (max-width: 768px) {
-    table {
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-  }
-}
 
-.pagination {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  select {
-    outline: none;
-    padding: 10px 20px;
-    border: 1px solid gray;
-    border-radius: 5px;
-    option {
-      padding: 10px;
-    }
-  }
-}
-
-.message__module{
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 20px;
-  textarea{
-    padding: 10px;
-    font-size: 18px;
-    min-height: 100px;
-    max-height: 150px;
-    max-width: 400px;
-    min-width: 200px;
-  }
-  &__btns{
+  .pagination {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 20px;
+    select {
+      outline: none;
+      padding: 10px 20px;
+      border: 1px solid gray;
+      border-radius: 5px;
+      option {
+        padding: 10px;
+      }
+    }
+  }
+
+  .message__module {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px;
+    textarea {
+      padding: 10px;
+      font-size: 18px;
+      min-height: 100px;
+      max-height: 150px;
+      max-width: 400px;
+      min-width: 200px;
+    }
+    &__btns {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 1320px) {
+    thead {
+      display: none;
+    }
+    tbody {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      border-radius: 10px;
+      tr {
+        width: 100%;
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: start;
+        .customer__budget {
+          display: none !important;
+        }
+        .customer__budget__media {
+          display: flex;
+          flex-direction: column;
+          text-align: start;
+          align-items: flex-start;
+        }
+        td {
+          h3 {
+            display: block !important;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 1320px) {
+    tbody {
+      tr {
+        td {
+          h3 {
+            font-size: 15px;
+          }
+          a,
+          p {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 1120px) {
+    table {
+      display: flex;
+      flex-direction: column;
+      max-width: 600px !important;
+      background: transparent !important;
+      tbody {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+
+        tr {
+          max-width: 300px;
+        }
+      }
+    }
+    .pagination {
+      flex-direction: column;
+      gap: 40px;
+      align-items: flex-start;
+      .MuiStack-root {
+        max-width: 300px;
+        gap: 5px;
+        li {
+          width: 25px;
+          height: 25px;
+          button {
+            padding: 3px !important;
+          }
+        }
+      }
+      select {
+        outline: none;
+        padding: 5px 10px;
+      }
+    }
+  }
+  @media (max-width: 960px) {
+    table {
+      max-width: 500px !important;
+      tbody {
+        tr {
+          max-width: 250px;
+        }
+      }
+    }
+    .customer__filters {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      width: 500px;
+      label {
+        select {
+          padding: 7px 15px;
+        }
+      }
+      button {
+        padding: 7px 15px;
+      }
+    }
+  }
+  @media (max-width: 850px) {
+    table {
+      max-width: 400px !important;
+      tbody {
+        grid-template-columns: 1fr;
+        tr {
+          max-width: 100%;
+        }
+      }
+    }
+    .customer__filters {
+      width: 400px;
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 760px) {
+    table {
+      max-width: 300px !important;
+    }
+    .customer__filters {
+      width: 300px;
+    }
+  }
+  @media (max-width: 730px) {
+    table {
+      max-width: 550px !important;
+    }
+    .customer__filters {
+      width: 550px;
+    }
+  }
+  @media (max-width: 660px) {
+    table {
+      max-width: 450px !important;
+      tr {
+        td {
+          font-size: 13px;
+        }
+      }
+    }
+    .customer__filters {
+      width: 450px;
+    }
+  }
+  @media (max-width: 575px) {
+    table {
+      max-width: 350px !important;
+      tr {
+        td {
+          font-size: 13px;
+        }
+      }
+    }
+    .customer__filters {
+      width: 350px;
+    }
+  }
+  @media (max-width: 470px) {
+    table {
+      max-width: 270px !important;
+      tr {
+        td {
+          font-size: 13px;
+        }
+      }
+    }
+    .customer__filters {
+      width: 270px;
+    }
+  }
+  @media (max-width: 400px) {
+    table {
+      max-width: 200px !important;
+      tr {
+        td {
+          font-size: 13px;
+        }
+      }
+    }
+    .customer__filters {
+      width: 200px;
+    }
   }
 }
+
+ .table__skaleton {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 50px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      margin-right: 10px;
+      span {
+        width: 100%;
+      }
+    }

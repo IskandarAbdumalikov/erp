@@ -3,7 +3,7 @@ import "./settings.scss";
 import {
   useGetProfileQuery,
   useUpdateProfileMutation,
-} from "../../context/adminSlice";
+} from "../../context/profileApi";
 import { FaPen } from "react-icons/fa";
 import Module from "../../components/module/Module";
 import { useNavigate } from "react-router-dom";
@@ -47,13 +47,9 @@ const Settings = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      updateProfile(formData).unwrap();
-      setShowEdit(false);
-      navigate("/admin/settings");
-    } catch (err) {
-      console.error("Failed to update profile", err);
-    }
+    updateProfile(formData);
+    setShowEdit(false);
+    navigate("/admin/settings");
   };
 
   const handleEditClick = () => {

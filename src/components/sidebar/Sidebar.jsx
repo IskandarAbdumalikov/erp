@@ -4,13 +4,14 @@ import { FaHandshake, FaStore, FaUserPlus, FaUsers } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 
 import "./sidebar.scss";
-import { useGetProfileQuery } from "../../context/adminSlice";
+import { useGetProfileQuery } from "../../context/profileApi";
 import { Avatar } from "@mui/material";
 
 const Sidebar = () => {
   let { data } = useGetProfileQuery();
   let user = data?.innerData?.user;
   let avatar = user?.fname?.split("")[0];
+  console.log(data);
 
   return (
     <div className="sidebar">

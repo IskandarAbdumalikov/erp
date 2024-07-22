@@ -61,6 +61,14 @@ const EditCustomer = () => {
           value={formData.fname}
           onChange={handleChange}
         />
+        <input
+          autoFocus
+          type="text"
+          name="lname"
+          placeholder="Familyasi"
+          value={formData.lname}
+          onChange={handleChange}
+        />
         <PatternFormat
           format="+998 (##) ###-####"
           id="phone_primary"

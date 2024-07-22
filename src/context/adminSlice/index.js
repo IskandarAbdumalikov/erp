@@ -9,21 +9,6 @@ export const adminApi = api.injectEndpoints({
       }),
       providesTags: ["Admin"],
     }),
-    getProfile: build.query({
-      query: (params) => ({
-        url: "/get/profile",
-        params,
-      }),
-      providesTags: ["Admin", "Profile"],
-    }),
-    updateProfile: build.mutation({
-      query: (body) => ({
-        url: "/update/profile",
-        method: "PATCH",
-        body,
-      }),
-      providesTags: ["Admin", "Profile"],
-    }),
     signIn: build.mutation({
       query: (body) => ({
         url: "/admin/sign-in",
@@ -47,6 +32,4 @@ export const {
   useRegisterAdminMutation,
   useSignInMutation,
   useGetAdminsQuery,
-  useGetProfileQuery,
-  useUpdateProfileMutation,
 } = adminApi;

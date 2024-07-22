@@ -19,6 +19,8 @@ import {
   Paper,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { FaEllipsisVertical } from "react-icons/fa6";
+import MenuModule from "./MenuModule";
 
 function PaperComponent(props) {
   return (
@@ -34,8 +36,10 @@ function PaperComponent(props) {
 const AdminHeader = ({ setClose }) => {
   const { t, i18n } = useTranslation();
   const [search, setSearch] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [open, setOpen] = useState(false);
+  const [showInput, setShowInput] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,7 +49,9 @@ const AdminHeader = ({ setClose }) => {
 
   const handleClose = () => {
     setOpen(false);
+    setSearch("");
     setConfirm(false);
+    setShowMenu(false);
   };
 
   useEffect(() => {
@@ -63,7 +69,12 @@ const AdminHeader = ({ setClose }) => {
 
   return (
     <div className="admin__header">
-      <div className="admin__header__left">
+      
+      <div
+        className={`admin__header__left ${
+          showInput ? "show__input__header" : ""
+        }`}
+      >
         <button
           className="admin__header__btn"
           onClick={() => setClose((p) => !p)}
@@ -71,7 +82,14 @@ const AdminHeader = ({ setClose }) => {
           <IoIosMenu />
         </button>
         <form className="form__search" action="">
-          <button>
+          <button className="input-btn">
+            <CiSearch />
+          </button>
+          <button
+            type="button"
+            className="search-btn"
+            onClick={() => setShowInput(true)}
+          >
             <CiSearch />
           </button>
           <input
@@ -80,23 +98,22 @@ const AdminHeader = ({ setClose }) => {
             value={search}
             type="text"
           />
-          {search ? (
-            <SearchModule search={search} setSearch={setSearch} />
-          ) : (
-            <></>
+          {showInput && (
+            <button
+              type="button"
+              className="close-btn"
+              onClick={() => setShowInput(false)}
+            >
+              X
+            </button>
           )}
-          {search ? (
-            <div
-              onClick={() => setSearch("")}
-              className="overlay-transparent"
-            ></div>
-          ) : (
-            <></>
-          )}
+          {search && <SearchModule search={search} setSearch={setSearch} />}
         </form>
-      </div>
+      </div>{" "}
+     
       <div className="admin__header__right">
         <ReactFlagsSelect
+          className="lang-select"
           countries={["US", "UZ"]}
           onSelect={handleLanguageChange}
           customLabels={{
@@ -105,17 +122,20 @@ const AdminHeader = ({ setClose }) => {
           }}
           placeholder={t("select_language")}
         />
-        <Button
+        <button
+          onClick={() => setShowMenu((p) => !p)}
+          className="menu-btn"
           variant="outlined"
-          className="button-log-out"
-          onClick={handleClickOpen}
         >
-          <RiLogoutBoxRLine
-            icon="pi pi-check"
-            label="Confirm"
-            className={"log-out-btn"}
-          />
-        </Button>
+          <FaEllipsisVertical />
+          {showMenu && (
+            <MenuModule
+              handleLanguageChange={handleLanguageChange}
+              handleClickOpen={handleClickOpen}
+              t={t}
+            />
+          )}
+        </button>
         <Dialog
           open={open}
           onClose={handleClose}
