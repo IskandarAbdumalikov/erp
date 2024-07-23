@@ -11,32 +11,25 @@ export const productApi = api.injectEndpoints({
     }),
     getProductById: build.query({
       query: (id) => ({
-        url: `/products/${id}`,
+        url: `/get/product/${id}`,
       }),
       providesTags: ["Product"],
     }),
     createProduct: build.mutation({
       query: (body) => ({
-        url: "/products",
+        url: "/create/product",
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Product"],
-    }),
-    deleteProduct: build.mutation({
-      query: (id) => ({
-        url: `/products/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["Product", "Seller"],
     }),
     updateProduct: build.mutation({
       query: ({ id, body }) => ({
-        url: `/products/${id}`,
-        method: "PUT", 
+        url: `/update/product/${id}`,
+        method: "PATCH",
         body,
       }),
-      invalidatesTags: ["Product"],
+      invalidatesTags: ["Product", "Seller"],
     }),
   }),
 });

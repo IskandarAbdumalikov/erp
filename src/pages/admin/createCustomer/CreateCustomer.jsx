@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "../register/register.scss";
+import "../../register/register.scss";
 import { useNavigate } from "react-router-dom";
-import { useRegisterCustomerMutation } from "../../context/customerApi";
+import { useRegisterCustomerMutation } from "../../../context/customerApi";
 import "./createCustomer.scss";
 import { PatternFormat } from "react-number-format";
 

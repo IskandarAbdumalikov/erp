@@ -22,6 +22,14 @@ export const sellerApi = api.injectEndpoints({
       }),
       providesTags: ["Seller", "Expense"],
     }),
+    pinSeller: build.mutation({
+      query: ({ seller }) => ({
+        url: `/update/seller/${seller._id}`,
+        method: "PATCH",
+        body: { ...seller, pin: !seller.pin },
+      }),
+      invalidatesTags: ["Seller", "Payment"],
+    }),
     loginSeller: build.mutation({
       query: (body) => ({
         url: "/auth/sign-in",
@@ -47,4 +55,5 @@ export const {
   useRegisterSellerMutation,
   useLoginSellerMutation,
   useGetSingleSellerQuery,
+  usePinSellerMutation,
 } = sellerApi;

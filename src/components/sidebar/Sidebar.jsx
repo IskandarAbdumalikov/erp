@@ -1,6 +1,12 @@
 import React, { memo } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { FaHandshake, FaStore, FaUserPlus, FaUsers } from "react-icons/fa";
+import {
+  FaBox,
+  FaHandshake,
+  FaStore,
+  FaUserPlus,
+  FaUsers,
+} from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 
 import "./sidebar.scss";
@@ -44,6 +50,12 @@ const Sidebar = () => {
           <NavLink className={"sidebar__link"} to={"store"}>
             <FaStore />
             <span>Ombor</span>
+          </NavLink>
+        </li>
+        <li className="sidebar__item">
+          <NavLink className={"sidebar__link"} to={"products"}>
+            <FaBox />
+            <span>Mahsulotlar</span>
           </NavLink>
         </li>
         <li className="sidebar__item">

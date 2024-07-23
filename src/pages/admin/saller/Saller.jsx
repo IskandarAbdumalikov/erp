@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../customer/customer.scss";
-import {
-  useGetCustomersQuery,
-  usePinCustomerMutation,
-} from "../../../context/customerApi";
+import { usePinSellerMutation } from "../../../context/sellerApi";
 import { Link } from "react-router-dom";
-import { FaEllipsis } from "react-icons/fa6";
+import { FaEllipsis, FaPhone } from "react-icons/fa6";
 import { ImCancelCircle } from "react-icons/im";
 import { TbListDetails } from "react-icons/tb";
 import { MdMessage, MdPayments } from "react-icons/md";
@@ -34,7 +31,6 @@ const initialState = {
   comment: "",
 };
 
-
 const Saller = () => {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
@@ -56,7 +52,7 @@ const Saller = () => {
     budget,
   });
   const [showParams, setShowParams] = useState("");
-  const [pinCustomer] = usePinCustomerMutation();
+  const [pinSeller] = usePinSellerMutation();
   const [showPaymentModule, setShowPaymentModule] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const BOT_TOKEN = "7313879684:AAH0lhoKddXhkYP-YO5QnYueauqqT3J9hzE";
@@ -69,7 +65,6 @@ const Saller = () => {
   };
   let { data: profileData } = useGetProfileQuery();
   let profileDay = profileData?.innerData?.date?.split("T")[0];
-  console.log(profileDay);
 
   useEffect(() => {
     if (isSuccess) {
@@ -114,8 +109,8 @@ const Saller = () => {
     });
   };
 
-  const handlePinSeller = (customer) => {
-    pinCustomer({ customer });
+  const handlePinSeller = (seller) => {
+    pinSeller({ seller });
   };
 
   const handleShowPaymentModule = (sellerId) => {
@@ -264,7 +259,9 @@ const Saller = () => {
                 </td>
                 <td>
                   <h3>TELEFON NO`MER</h3>
-                  <a href={`tel:${el.phone_primary}`}>{el.phone_primary}</a>
+                  <a className="phone__number" href={`tel:${el.phone_primary}`}>
+                    <FaPhone />  {el.phone_primary}
+                  </a>
                 </td>
                 <td
                   className={`customer__budget ${

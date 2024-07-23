@@ -1,0 +1,116 @@
+.products {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+  &__header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 30px 20px;
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      button {
+        padding: 10px 30px;
+        border-radius: 5px;
+        background: red;
+        color: white;
+        border: 1px solid red;
+      }
+    }
+  }
+
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 20px;
+    button {
+      padding: 10px 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      max-height: 50px;
+    }
+  }
+  .product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    p {
+      margin: 5px 0;
+      color: #666;
+    }
+  }
+  .seller-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+
+    p {
+      margin: 0;
+      color: #333;
+    }
+  }
+
+  form {
+    margin-bottom: 20px;
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+}
+
+// Responsiveness
+@media (max-width: 768px) {
+  .product-card {
+    width: 100%;
+  }
+}

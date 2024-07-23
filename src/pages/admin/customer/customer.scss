@@ -68,6 +68,11 @@
           padding: 18px 20px;
           text-align: start;
           position: relative;
+          .phone__number{
+            svg{
+              color: rgb(0, 207, 0);
+            }
+          }
 
           h3 {
             display: none;
